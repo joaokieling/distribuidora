@@ -8,7 +8,7 @@ require_once 'Comprador.php';
 require_once 'Repositor.php';
 require_once 'Venda.php';
 
-echo "<h1>🍺 Distribuidora de Bebidas — POO</h1>";
+echo "<h1>🍺 Distribuidora de Bebidas</h1>";
 
 // ---------- 1. Cadastro de pessoas ----------
 $vendedor  = new Vendedor("Carlos Souza", "111.111.111-11", 30, "V001", 5.0);
