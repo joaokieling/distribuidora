@@ -1,82 +1,7 @@
-<<<<<<< HEAD
-<?php require_once 'config/database.php'; ?>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUX — Distribuidora de Bebidas</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-
-<header class="navbar">
-    <a href="index.php" class="logo">LUX</a>
-
-    <nav>
-        <ul class="nav-links">
-            <li><a href="index.php">Início</a></li>
-            <li><a href="pages/produtos.php">Bebidas</a></li>
-            <li><a href="#">Ofertas</a></li>
-            <li><a href="#">Sobre</a></li>
-        </ul>
-    </nav>
-
-    <div class="nav-icons">
-        <a href="pages/pesquisa.php" title="Pesquisar">⌕</a>
-        <a href="#" title="Minha conta">♙</a>
-        <a href="pages/carrinho.php" title="Carrinho">🛒</a>
-    </div>
-</header>
-
-<main>
-    <section class="hero">
-        <h1>O SABOR DO<br><span>SEU MOMENTO.</span></h1>
-        <p>Bebidas para todos os momentos. Qualidade, variedade e sabor em um só lugar.</p>
-        <a href="pages/produtos.php" class="btn">VER BEBIDAS</a>
-    </section>
-
-    <section style="padding: 40px 0;">
-        <div class="section-title">
-            <h2>ENCONTRE SUA BEBIDA</h2>
-            <p>Explore nossas principais categorias</p>
-        </div>
-
-        <div class="category-grid">
-            <a href="pages/produtos.php" class="category-card">
-                <h3>🍺 Cervejas</h3>
-                <p>Geladas e refrescantes</p>
-            </a>
-            <a href="pages/produtos.php" class="category-card">
-                <h3>🥃 Destilados</h3>
-                <p>Para momentos especiais</p>
-            </a>
-            <a href="pages/produtos.php" class="category-card">
-                <h3>🍷 Vinhos</h3>
-                <p>Seleção premium</p>
-            </a>
-            <a href="pages/produtos.php" class="category-card">
-                <h3>🥂 Espumantes</h3>
-                <p>Para comemorar</p>
-            </a>
-            <a href="pages/produtos.php" class="category-card">
-                <h3>⚡ Energéticos</h3>
-                <p>Mais disposição</p>
-            </a>
-            <a href="pages/produtos.php" class="category-card">
-                <h3>💧 Sem Álcool</h3>
-                <p>Para toda a família</p>
-            </a>
-        </div>
-    </section>
-</main>
-
-</body>
-</html>
-=======
 <?php
 
 require_once 'Pessoa.php';
+require_once 'Categoria.php';
 require_once 'Bebida.php';
 require_once 'Estoque.php';
 require_once 'Vendedor.php';
@@ -99,9 +24,9 @@ $compradorMaior->exibirDados();
 $compradorMenor->exibirDados();
 
 // ---------- 2. Cadastro de bebidas ----------
-$cerveja  = new Bebida("Cerveja Pilsen", 5.50, 4.8, 350);
-$vodka    = new Bebida("Vodka Premium",  89.90, 40.0, 1000);
-$refri    = new Bebida("Refrigerante Cola", 7.00, 0.0, 2000);
+$cerveja = new Bebida("Cerveja Pilsen", 5.50, 4.8, 350, Categoria::CERVEJA);
+$vodka   = new Bebida("Vodka Premium", 89.90, 40.0, 1000, Categoria::DESTILADO);
+$refri   = new Bebida("Refrigerante Cola", 7.00, 0.0, 2000, Categoria::REFRIGERANTE);
 
 $cerveja->exibirDados();
 $vodka->exibirDados();
@@ -126,9 +51,8 @@ $venda1->finalizar();
 echo "<h2>🛒 Venda 2 — Pedro (16 anos)</h2>";
 $venda2 = new Venda($compradorMenor, $vendedor, $estoque);
 $venda2->adicionarItem($cerveja, 2);   // 🚫 bloqueado
-$venda2->adicionarItem($refri,   3);   // ✅ permitido (não alcoólica)
+$venda2->adicionarItem($refri,   3);   // ✅ permitido
 
-// Finaliza só se tiver item válido
 if ($venda2->calcularTotal() > 0) {
     $venda2->finalizar();
 } else {
@@ -137,4 +61,3 @@ if ($venda2->calcularTotal() > 0) {
 
 // ---------- 6. Estoque final ----------
 $estoque->exibirEstoque();
->>>>>>> 0edd241b3532b24208dc1d3fcc558f61764ca2a1
