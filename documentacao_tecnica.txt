@@ -1,0 +1,121 @@
+Documentação Técnica - Distribuidora de Bebidas
+
+1. Identificação
+
+Sistema: Distribuidora de Bebidas
+Disciplina: Programação Orientada a Objetos
+Data de entrega: 02/10/2026
+
+Integrantes:
+Diego William
+Felipe Plate
+João Kieling
+Nicoli Mota
+Patricia dos Santos
+
+Linguagem: PHP 8+
+Paradigma: Orientação a Objetos
+
+2. Visão técnica
+
+O sistema simula uma distribuidora de bebidas. Permite cadastrar compradores, vendedores e repositores, cadastrar bebidas, controlar estoque e registrar vendas. A regra principal é bloquear venda de bebida alcoólica para menores de 18 anos. Também calcula total da venda, baixa no estoque e comissão do vendedor. Utiliza um Banco de Dados.
+
+3. Estrutura de arquivos
+
+projeto-final/
+- .gitignore
+- link_repositorio.txt
+- README.md
+- index.php
+- Pessoa.php
+- Bebida.php
+- Categoria.php
+- Estoque.php
+- Comprador.php
+- Vendedor.php
+- Repositor.php
+- Venda.php
+- docs/
+  - Documentacao_Tecnica.pdf
+
+Cada arquivo .php tem uma classe, menos o index.php, que é o ponto de entrada.
+
+4. Dicionário de classes
+
+Pessoa -> classe base. Atributos: nome, cpf, idade. Métodos: getters, isMaiorDeIdade(), exibirDados().
+
+Comprador -> herda de Pessoa. Método: podeComprar(Bebida), que retorna falso se a bebida for alcoólica e o comprador for menor.
+
+Vendedor -> herda de Pessoa. Atributos: matricula, comissao. Método: calcularComissao(valor).
+
+Repositor -> herda de Pessoa. Atributo: setor. Método: repor(estoque, bebida, qtd).
+
+Bebida -> atributos: nome, preco, teorAlcoolico, volumeMl, categoria. Método: isAlcoolica() (teor maior que 0,5%).
+
+Categoria -> só constantes e métodos estáticos: nomes das categorias, TEOR_MINIMO_ALCOOLICO, IDADE_MINIMA_LEGAL, rotulo().
+
+Estoque -> atributo: itens (nome para quantidade). Métodos: adicionar, remover, consultar, exibirEstoque.
+
+Venda -> atributos: comprador, vendedor, estoque, itens, finalizada. Métodos: adicionarItem, calcularTotal, finalizar.
+
+5. Relacionamentos
+
+Herança: Comprador, Vendedor e Repositor herdam de Pessoa.
+
+Associação: Venda usa Comprador, Vendedor e Estoque.
+
+Agregação: Estoque guarda Bebidas.
+
+Dependência: Bebida usa Categoria.
+
+6. Herança, sobrescrita e polimorfismo
+
+Herança: três classes estendem Pessoa e adicionam seus próprios atributos.
+
+Sobrescrita: exibirDados() é redefinido em cada subclasse, chamando parent::exibirDados().
+
+Polimorfismo: objetos diferentes respondem ao mesmo método exibirDados() de formas diferentes.
+
+7. Fluxos principais
+
+Reposição: Repositor.repor() chama Estoque.adicionar().
+
+Venda: Venda.adicionarItem() verifica idade e estoque. Se permitido, adiciona o item. Venda.finalizar() dá baixa no estoque, calcula total e comissão e imprime a nota.
+
+8. Regras e validações
+
+Idade entre 0 e 120
+Vendedor e repositor maiores de idade
+Preço, teor e volume não negativos
+Bebida alcoólica se teor maior que 0,5%
+Menor não compra bebida alcoólica
+Quantidade no estoque deve ser positiva
+Não remover mais do que existe no estoque
+Não finalizar venda sem itens
+Não adicionar item em venda finalizada
+
+9. Dependências
+
+PHP 8+, navegador, nenhuma biblioteca externa, nenhum banco de dados.
+
+10. Testes realizados
+
+Criar pessoa com idade 200 -> Erro
+Criar vendedor com 17 anos -> Erro
+Vender cerveja para menor -> Bloqueio
+Vender refrigerante para menor -> Permitido
+Remover quantidade negativa -> Erro
+Vender mais que o estoque -> Erro
+Venda completa -> Sucesso
+
+11. Limitações
+
+Sem banco de dados, sem login, interface simples, sem cadastro dinâmico, sem histórico de vendas.
+
+12. Possíveis melhorias
+
+Banco de dados, login, CSS, relatórios, controle de validade, separação em pastas.
+
+13. Conclusão
+
+O sistema atende ao proposto e aplica herança, encapsulamento, sobrescrita, polimorfismo, associação e exceções de forma coerente.
