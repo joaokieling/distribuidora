@@ -9,10 +9,6 @@ class Comprador extends Pessoa {
         parent::__construct($nome, $cpf, $idade);
     }
 
-    /**
-     * Verifica se o comprador PODE comprar a bebida.
-     * Regra: bebida alcoólica exige 18+.
-     */
     public function podeComprar(Bebida $bebida): bool {
         if ($bebida->isAlcoolica() && !$this->isMaiorDeIdade()) {
             return false;
@@ -21,7 +17,7 @@ class Comprador extends Pessoa {
     }
 
     public function exibirDados(): void {
-        echo "<h3>🧑 COMPRADOR</h3>";
+        echo "<h3>COMPRADOR</h3>";
         parent::exibirDados();
     }
 }

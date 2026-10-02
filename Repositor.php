@@ -20,11 +20,11 @@ class Repositor extends Pessoa {
 
     public function repor(Estoque $estoque, Bebida $bebida, int $quantidade): void {
         $estoque->adicionar($bebida, $quantidade);
-        echo "✅ {$this->nome} repôs {$quantidade}x '{$bebida->getNome()}' no setor {$this->setor}.<br>";
+        echo "{$this->nome} repôs {$quantidade}x '{$bebida->getNome()}' no setor {$this->setor}.<br>";
     }
 
     public function exibirDados(): void {
-        echo "<h3>📦 REPOSITOR</h3>";
+        echo "<h3>REPOSITOR</h3>";
         parent::exibirDados();
         echo "Setor: {$this->setor}<br>";
     }

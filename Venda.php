@@ -29,15 +29,13 @@ class Venda {
             throw new InvalidArgumentException("Quantidade inválida.");
         }
 
-        // 🔒 VERIFICAÇÃO DE IDADE
         if (!$this->comprador->podeComprar($bebida)) {
-            echo "🚫 <strong>VENDA BLOQUEADA:</strong> {$this->comprador->getNome()} " .
+            echo "<strong>VENDA BLOQUEADA:</strong> {$this->comprador->getNome()} " .
                  "({$this->comprador->getIdade()} anos) não pode comprar " .
                  "'{$bebida->getNome()}' (bebida alcoólica).<br>";
             return;
         }
 
-        // Verifica estoque
         if ($this->estoque->consultar($bebida) < $quantidade) {
             throw new RuntimeException("Estoque insuficiente para '{$bebida->getNome()}'.");
         }
@@ -61,7 +59,6 @@ class Venda {
             throw new RuntimeException("Não há itens na venda.");
         }
 
-        // Baixa no estoque
         foreach ($this->itens as $item) {
             $this->estoque->remover($item['bebida'], $item['qtd']);
         }
@@ -70,7 +67,7 @@ class Venda {
         $total     = $this->calcularTotal();
         $comissao  = $this->vendedor->calcularComissao($total);
 
-        echo "<h3>🧾 NOTA FISCAL</h3>";
+        echo "<h3>NOTA FISCAL</h3>";
         echo "Comprador: {$this->comprador->getNome()}<br>";
         echo "Vendedor: {$this->vendedor->getNome()}<br>";
         echo "-----------------------------<br>";
@@ -82,7 +79,7 @@ class Venda {
         echo "-----------------------------<br>";
         echo "<strong>Total: R$ " . number_format($total, 2, ',', '.') . "</strong><br>";
         echo "Comissão do vendedor: R$ " . number_format($comissao, 2, ',', '.') . "<br>";
-        echo "✅ Venda finalizada.<br>";
+        echo "Venda finalizada.<br>";
     }
 
     public function isFinalizada(): bool { return $this->finalizada; }

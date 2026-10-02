@@ -4,7 +4,7 @@ require_once 'Pessoa.php';
 
 class Vendedor extends Pessoa {
     private string $matricula;
-    private float  $comissao; // % sobre a venda
+    private float  $comissao;
 
     public function __construct(string $nome, string $cpf, int $idade, string $matricula, float $comissao = 5.0) {
         parent::__construct($nome, $cpf, $idade);
@@ -24,7 +24,7 @@ class Vendedor extends Pessoa {
     }
 
     public function exibirDados(): void {
-        echo "<h3>🧑‍💼 VENDEDOR</h3>";
+        echo "<h3>VENDEDOR</h3>";
         parent::exibirDados();
         echo "Matrícula: {$this->matricula}<br>";
         echo "Comissão: {$this->comissao}%<br>";

@@ -3,7 +3,7 @@
 require_once 'Bebida.php';
 
 class Estoque {
-    /** @var array<string,int> nome => quantidade */
+    /** @var array<string,int> */
     private array $itens = [];
 
     public function adicionar(Bebida $bebida, int $quantidade): void {
@@ -15,6 +15,10 @@ class Estoque {
     }
 
     public function remover(Bebida $bebida, int $quantidade): void {
+        if ($quantidade <= 0) {
+            throw new InvalidArgumentException("Quantidade deve ser positiva.");
+        }
+
         $nome = $bebida->getNome();
         $atual = $this->itens[$nome] ?? 0;
 
@@ -29,7 +33,7 @@ class Estoque {
     }
 
     public function exibirEstoque(): void {
-        echo "<h3>📦 Estoque atual</h3>";
+        echo "<h3>Estoque atual</h3>";
         if (empty($this->itens)) {
             echo "Estoque vazio.<br>";
             return;
