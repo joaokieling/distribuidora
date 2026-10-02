@@ -1,0 +1,5 @@
+link_repositorio.txt
+*.zip
+.idea/
+.vscode/
+.DS_Store
